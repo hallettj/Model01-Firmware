@@ -16,6 +16,9 @@
 // The Kaleidoscope core
 #include "Kaleidoscope.h"
 
+// Illuminates LED to indicate one-shot & sticky state
+#include "Kaleidoscope-LED-ActiveModColor.h"
+
 // Allows some modifiers to stay active for one keypress after a tap
 #include "Kaleidoscope-OneShot.h"
 
@@ -345,7 +348,10 @@ void setup() {
     // and allows us to turn LEDs off when it goes to sleep.
     &HostPowerManagement,
 
-    &OneShot
+    &OneShot,
+
+    // This plugin should be activated last
+    &ActiveModColorEffect
   );
 
   // While we hope to improve this in the future, the NumPad plugin
@@ -364,6 +370,9 @@ void setup() {
   // called 'BlazingTrail'. For details on other options,
   // see https://github.com/keyboardio/Kaleidoscope-LED-Stalker
   StalkerEffect.variant = STALKER(BlazingTrail);
+
+  ActiveModColorEffect.highlight_color = CRGB(0xff, 0xff, 0xff);
+  ActiveModColorEffect.sticky_color = CRGB(0xff, 0x00, 0x00);
 
   // We want the keyboard to be able to wake the host up from suspend.
   HostPowerManagement.enableWakeup();
