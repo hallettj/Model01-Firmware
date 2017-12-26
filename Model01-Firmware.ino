@@ -19,6 +19,9 @@
 // Illuminates LED to indicate one-shot & sticky state
 #include "Kaleidoscope-LED-ActiveModColor.h"
 
+// Press Escape to cancel one-shot
+#include "Kaleidoscope-Escape-OneShot.h"
+
 // Allows some modifiers to stay active for one keypress after a tap
 #include "Kaleidoscope-OneShot.h"
 
@@ -349,6 +352,7 @@ void setup() {
     &HostPowerManagement,
 
     &OneShot,
+    &EscapeOneShot,
 
     // This plugin should be activated last
     &ActiveModColorEffect
