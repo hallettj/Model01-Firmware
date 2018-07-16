@@ -16,6 +16,8 @@
 // The Kaleidoscope core
 #include "Kaleidoscope.h"
 
+/* BEGIN includes added by hallettj */
+
 #include "Kaleidoscope-Heatmap.h"
 
 // Illuminates LED to indicate one-shot & sticky state
@@ -26,6 +28,11 @@
 
 // Allows some modifiers to stay active for one keypress after a tap
 #include "Kaleidoscope-OneShot.h"
+
+// Assign distinct behaviors to tap vs hold per key
+#include "Kaleidoscope-Qukeys.h"
+
+/* END includes added by hallettj */
 
 // Support for keys that move the mouse
 #include "Kaleidoscope-MouseKeys.h"
@@ -144,14 +151,14 @@ KEYMAPS(
    Key_Backtick, Key_Quote,     Key_Comma, Key_Period, Key_P, Key_Y, Key_Tab,
    Key_PageUp,   Key_A,         Key_O,     Key_E,      Key_U, Key_I,
    Key_PageDown, Key_Semicolon, Key_Q,     Key_J,      Key_K, Key_X, Key_Escape,
-   Key_LeftControl, Key_Spacebar, Key_LeftAlt, OSM(LeftShift),
+   Key_Escape, Key_Spacebar, Key_F12, OSM(LeftShift),
    ShiftToLayer(FUNCTION),
 
    Key_ScrollLock, Key_6, Key_7, Key_8, Key_9, Key_0, Key_KeypadNumLock,
    Key_Enter,      Key_F, Key_G, Key_C, Key_R, Key_L, Key_Slash,
                    Key_D, Key_H, Key_T, Key_N, Key_S, Key_Minus,
    Key_Backspace,  Key_B, Key_M, Key_W, Key_V, Key_Z, Key_Equals,
-   OSM(RightShift), Key_RightAlt, Key_Enter, Key_RightControl,
+   OSM(RightShift), Key_F12, Key_Enter, Key_Escape,
    ShiftToLayer(FUNCTION)),
 
   [FUNCTION] =  KEYMAP_STACKED
@@ -283,6 +290,9 @@ USE_MAGIC_COMBOS({.action = toggleKeyboardProtocol,
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
 KALEIDOSCOPE_INIT_PLUGINS(
+  // Qukeys should be initialized first
+  Qukeys,
+
   // The boot greeting effect pulses the LED button for 10 seconds after the keyboard is first connected
   BootGreetingEffect,
 
@@ -347,6 +357,18 @@ KALEIDOSCOPE_INIT_PLUGINS(
  * Kaleidoscope and any plugins.
  */
 void setup() {
+  // Dual-use keys in the format `Qukey(LAYER, ROW, COL, HELD_KEYCODE)`. See the
+  // diagram in the MagicCombo readme for coordinates:
+  // https://github.com/keyboardio/Kaleidoscope-MagicCombo#further-reading
+  QUKEYS(
+    kaleidoscope::Qukey(DVORAK, 0, 7, Key_LeftControl),  // Escape / Left Ctrl
+    kaleidoscope::Qukey(DVORAK, 0, 8, Key_RightControl), // Escape / Right Ctrl
+    kaleidoscope::Qukey(DVORAK, 2, 7, Key_LeftAlt),      // F12 / Left Alt
+    kaleidoscope::Qukey(DVORAK, 2, 8, Key_RightAlt)      // F12 / Right Alt
+  )
+  Qukeys.setTimeout(250);
+  Qukeys.setReleaseDelay(20);
+
   // First, call Kaleidoscope's internal setup function
   Kaleidoscope.setup();
 
