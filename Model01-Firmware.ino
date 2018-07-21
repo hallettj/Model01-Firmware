@@ -166,14 +166,14 @@ KEYMAPS(
    Key_Tab,  ___,              ___,           Key_UpArrow,       ___,               ___,     ___,
    Key_Home, ___,              Key_LeftArrow, Key_DownArrow,     Key_RightArrow,    ___,
    Key_End,  Key_PrintScreen,  Key_Insert,    Key_mouseScrollDn, Key_mouseScrollUp, ___,     ___,
-   ___, Key_Delete, Key_LeftBracket, Key_LeftCurlyBracket,
+   ___, Key_Delete, Key_LeftCurlyBracket, Key_RightCurlyBracket,
    ___,
 
    Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,      Key_F8,      Key_F9,      Key_F10,          Key_F11,
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_Keypad7, Key_Keypad8, Key_Keypad9, Key_Plus,         Key_F12,
                                ___,                    Key_Keypad4, Key_Keypad5, Key_Keypad6, Key_KeypadEquals, ___,
    Key_Delete,                 Consumer_Mute,          Key_Keypad1, Key_Keypad2, Key_Keypad3, Key_Backslash,    Key_Pipe,
-   Key_RightCurlyBracket, Key_RightBracket, Key_Backspace, Key_Keypad0,
+   Key_LeftBracket, Key_RightBracket, Key_Backspace, Key_Keypad0,
    ___)
 
 	) // KEYMAPS(
