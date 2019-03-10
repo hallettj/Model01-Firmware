@@ -29,6 +29,8 @@
 // Allows some modifiers to stay active for one keypress after a tap
 #include "Kaleidoscope-OneShot.h"
 
+#include "Kaleidoscope-LEDEffect-Status.h"
+
 /* END includes added by hallettj */
 
 // Support for keys that move the mouse
@@ -341,6 +343,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   OneShot,
   EscapeOneShot,
   HeatmapEffect,
+  StatusEffect,
 
   // This plugin should be activated last
   ActiveModColorEffect
@@ -366,6 +369,11 @@ void setup() {
 
   ActiveModColorEffect.highlight_color = CRGB(0xff, 0xff, 0xff);
   ActiveModColorEffect.sticky_color = CRGB(0xff, 0x00, 0x00);
+
+  StatusEffect.highlightedStatuses =
+    LED_NUM_LOCK |
+    LED_CAPS_LOCK |
+    LED_COMPOSE;
 
   // We want to make sure that the firmware starts with LED effects off
   // This avoids over-taxing devices that don't have a lot of power to share
